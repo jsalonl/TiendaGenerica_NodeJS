@@ -35,23 +35,31 @@ const mostrar = (req, res)=>{
 
 //Crear
 const crear = (req,res)=>{
-  var cliente = new Cliente({
-    cedula_cliente: req.body.cedula,
-    direccion_cliente: req.body.direccion,
-    email_cliente: req.body.email,
-    nombre_cliente: req.body.nombre,
-    telefono_cliente: req.body.telefono
-  })
-  cliente.save(function(error, cliente){
-    if(error){
-      console.error(error)
-      return res.status(500).json({
-        message: 'Error al crear cliente',
-        detalles_error: error
-      })
-    }
-    res.status(201).redirect('/clientes')
-  })
+  var cedula = req.body.cedula
+  const account = Cliente.findOne({ cedula })
+  if(account){
+    return res.status(500).json({
+      message: 'Cliente con cedula ya existente en sistema'
+    })
+  }else{
+    var cliente = new Cliente({
+      cedula_cliente: req.body.cedula,
+      direccion_cliente: req.body.direccion,
+      email_cliente: req.body.email,
+      nombre_cliente: req.body.nombre,
+      telefono_cliente: req.body.telefono
+    })
+    cliente.save(function(error, cliente){
+      if(error){
+        console.error(error)
+        return res.status(500).json({
+          message: 'Error al crear cliente',
+          detalles_error: error
+        })
+      }
+      res.status(201).redirect('/clientes')
+    })
+  }
 }
 
 //Editar

@@ -2,7 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const clienteSchema = new Schema({
-  cedula_cliente: Number,
+  cedula_cliente: {
+    type: Number,
+    required: true,
+    unique: true
+  },
   direccion_cliente: String,
   email_cliente: String,
   nombre_cliente: String,
