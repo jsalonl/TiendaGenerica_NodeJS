@@ -33,6 +33,26 @@ const mostrar = (req, res)=>{
   })
 }
 
+//Return JSON
+const json = (req, res)=>{
+  var filterCliente = req.query.search || null
+  let filter = {}
+  if(filterCliente !== null){
+    filter = {cedula_cliente: filterCliente}
+  }
+  Cliente.find(filter, (error, clientes)=>{
+    if(error){
+      console.error(error)
+      return res.status(500).json({
+        message: 'Error al listar clientes',
+        detalles_error: error
+      })
+    }else{
+      return res.status(200).json({clientes: clientes})
+    }
+  })
+}
+
 //Crear
 const crear = (req,res)=>{
   var cliente = new Cliente({
@@ -104,5 +124,6 @@ module.exports = {
   mostrar,
   crear,
   editar,
-  borrar
+  borrar,
+  json
 }

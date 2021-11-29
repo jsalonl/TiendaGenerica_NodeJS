@@ -125,10 +125,31 @@ const borrar = (req,res)=>{
   })
 }
 
+//Return JSON
+const json = (req, res)=>{
+  var filterProdcuto = req.query.search || null
+  let filter = {}
+  if(filterProdcuto !== null){
+    filter = {codigo_producto: filterProdcuto}
+  }
+  Producto.find(filter, (error, productos)=>{
+    if(error){
+      console.error(error)
+      return res.status(500).json({
+        message: 'Error al listar productos',
+        detalles_error: error
+      })
+    }else{
+      return res.status(200).json({productos: productos})
+    }
+  })
+}
+
 module.exports = {
   mostrar,
   crear,
   importCSV,
   editar,
-  borrar
+  borrar,
+  json
 }

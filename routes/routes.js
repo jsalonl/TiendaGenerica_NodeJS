@@ -20,6 +20,7 @@ const clienteController = require('../controllers/clienteController')
 const usuarioController = require('../controllers/usuarioController')
 const proveedorController = require('../controllers/proveedorController')
 const productoController = require('../controllers/productoController')
+const ventasController = require('../controllers/ventasController')
 const indexController = require('../controllers/indexController')
 
 //Ruta inicial - Login
@@ -37,6 +38,7 @@ router.get('/usuarios/borrar/:id', usuarioController.borrar)
 
 //Ruta clientes
 router.get('/clientes', clienteController.mostrar)
+router.post('/clientes', clienteController.json)
 router.post('/clientes/crear', clienteController.crear)
 router.post('/clientes/editar', clienteController.editar)
 router.get('/clientes/borrar/:id', clienteController.borrar)
@@ -50,8 +52,12 @@ router.get('/proveedores/borrar/:id', proveedorController.borrar)
 
 //Ruta productos
 router.get('/productos', productoController.mostrar)
+router.post('/productos', productoController.json)
 router.post('/productos/crear', uploads.single('CSV'), productoController.importCSV)
 router.post('/productos/editar', productoController.editar)
 router.get('/productos/borrar/:id', productoController.borrar)
+
+//Ruta Ventas
+router.get('/ventas', ventasController.mostrar)
 
 module.exports = router
