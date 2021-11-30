@@ -32,7 +32,7 @@
       <div class="container-xl">
 
         <div class="app-card app-card-orders-table shadow-sm mb-5">
-          <div class="container-fluid px-4 py-2">		
+          <div class="container-fluid px-4 py-2">	
             <div class="row">
               <h3>Modulo Ventas</h3>
             </div>
@@ -72,12 +72,9 @@
               </div>
 
               <div class="row mt-4 d-none panelVentas">
-                <form id="formularioVenta">
-                  <input type="hidden" name="insertar" value="">
+                <form id="formularioVenta" action="/ventas/crear" method="post">
                   <input type="hidden" name="codigoVenta" id="codigoVenta" value="">
                   <input type="hidden" name="cedulaCliente" id="cedula">
-                  <!-- //TODO sesion para usuario  -->
-                  <input type="hidden" name="cedulaUsuario" value="${sessionScope.usuario}">
                   <input type="hidden" name="ivaVenta" id="iva">
                   <input type="hidden" name="totalVenta" id="subtotal">
                   <input type="hidden" name="valorVenta" id="total">
@@ -97,6 +94,7 @@
                         <tr>
                           <td width="20%">
                             <input type="text" name="codp1" class="form-control codigoProducto">
+                            <input type="hidden" name="idp1" class="form-control">
                           </td>
                           <td>
                             <input type="text" readonly class="form-control nombreProducto">
@@ -105,13 +103,14 @@
                             <input type="number" name="canp1" class="form-control cantidadProducto">
                           </td>
                             <td class="text-end" width="15%">
-                            <input type="text" readonly class="form-control text-end valorProducto">
+                            <input type="text" name="valp1" readonly class="form-control text-end valorProducto">
                           </td>
                         </tr> 
                         <!-- Producto 2 -->
                         <tr>
                           <td width="20%">
                             <input type="text" name="codp2" class="form-control codigoProducto">
+                            <input type="hidden" name="idp2" class="form-control">
                           </td>
                           <td>
                             <input type="text" readonly class="form-control nombreProducto">
@@ -120,13 +119,14 @@
                             <input type="number" name="canp2" class="form-control cantidadProducto">
                           </td>
                             <td class="text-end" width="15%">
-                            <input type="text" readonly class="form-control text-end valorProducto">
+                            <input type="text" name="valp2" readonly class="form-control text-end valorProducto">
                           </td>
                         </tr> 
                         <!-- Producto 3 -->
                         <tr>
                           <td width="20%">
                             <input type="text" name="codp3" class="form-control codigoProducto">
+                            <input type="hidden" name="idp3" class="form-control">
                           </td>
                           <td>
                             <input type="text" readonly class="form-control nombreProducto">
@@ -135,7 +135,7 @@
                             <input type="number" name="canp3" class="form-control cantidadProducto">
                           </td>
                             <td class="text-end" width="15%">
-                            <input type="text" readonly class="form-control text-end valorProducto">
+                            <input type="text" name="valp3" readonly class="form-control text-end valorProducto">
                           </td>
                         </tr> 
                       </tbody>
@@ -233,6 +233,7 @@ $(document).ready(function(){
 					td.parent().next().next().next().children().val(0);
 					td.parent().next().next().next().children().attr(0);
 				}else{
+          td.next().val(resultado.productos[0]._id)
           td.parent().next().children().val(resultado.productos[0].nombre_producto);
 					td.parent().next().next().next().children().val(resultado.productos[0].precio_venta);
 					td.parent().next().next().next().children().attr("data-value",resultado.productos[0].precio_venta);

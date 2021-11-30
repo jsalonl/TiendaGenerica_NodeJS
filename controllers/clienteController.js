@@ -2,8 +2,8 @@ const Cliente = require('../models/Cliente')
 
 //Mostrar
 const mostrar = (req, res)=>{
-  var filterCliente = req.query.search || null
-  var typeFilter = req.query.type || null
+  let filterCliente = req.query.search || null
+  let typeFilter = req.query.type || null
   let filter = {}
   if(filterCliente !== null){
     switch (typeFilter) {
@@ -35,7 +35,7 @@ const mostrar = (req, res)=>{
 
 //Return JSON
 const json = (req, res)=>{
-  var filterCliente = req.query.search || null
+  let filterCliente = req.query.search || null
   let filter = {}
   if(filterCliente !== null){
     filter = {cedula_cliente: filterCliente}
@@ -55,7 +55,7 @@ const json = (req, res)=>{
 
 //Crear
 const crear = (req,res)=>{
-  var cliente = new Cliente({
+  let cliente = new Cliente({
     cedula_cliente: req.body.cedula,
     direccion_cliente: req.body.direccion,
     email_cliente: req.body.email,
@@ -76,12 +76,12 @@ const crear = (req,res)=>{
 
 //Editar
 const editar = (req,res)=>{
-  var id = req.body.id_editar
-  var nombre = req.body.nombre_editar
-  var cedula = req.body.cedula_editar
-  var direccion = req.body.direccion_editar
-  var email = req.body.email_editar
-  var telefono = req.body.telefono_editar
+  let id = req.body.id_editar
+  let nombre = req.body.nombre_editar
+  let cedula = req.body.cedula_editar
+  let direccion = req.body.direccion_editar
+  let email = req.body.email_editar
+  let telefono = req.body.telefono_editar
   Cliente.findByIdAndUpdate(
     id,
     {
@@ -105,7 +105,7 @@ const editar = (req,res)=>{
 
 //Borrar
 const borrar = (req,res)=>{
-  var id = req.params.id
+  let id = req.params.id
   Cliente.findByIdAndRemove(
     id,
       (error, cliente)=>{

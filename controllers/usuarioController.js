@@ -9,8 +9,8 @@ const login = (req,res)=>{
 
 //Login Process
 async function loginProcess (req,res,next){
-  var usuario = req.body.usuario
-  var password = req.body.password
+  let usuario = req.body.usuario
+  let password = req.body.password
   
   const account = await Usuario.findOne({ usuario })
   
@@ -57,7 +57,7 @@ const mostrar = (req, res)=>{
 
 //Crear
 const crear = (req,res)=>{
-  var password = bcrypt.hashSync(req.body.password, BCRYPT_SALT_ROUNDS)
+  let password = bcrypt.hashSync(req.body.password, BCRYPT_SALT_ROUNDS)
   const usuario = new Usuario({
     cedula_usuario: req.body.cedula,
     nombre_usuario: req.body.nombre,
@@ -79,12 +79,12 @@ const crear = (req,res)=>{
 
 //Editar
 const editar = (req,res)=>{
-  var id = req.body.id_editar
-  var nombre = req.body.nombre_editar
-  var cedula = req.body.cedula_editar
-  var email = req.body.email_editar
-  var usuario = req.body.usuario_editar
-  var password = bcrypt.hashSync(req.body.password_editar, BCRYPT_SALT_ROUNDS)
+  let id = req.body.id_editar
+  let nombre = req.body.nombre_editar
+  let cedula = req.body.cedula_editar
+  let email = req.body.email_editar
+  let usuario = req.body.usuario_editar
+  let password = bcrypt.hashSync(req.body.password_editar, BCRYPT_SALT_ROUNDS)
   Usuario.findByIdAndUpdate(
     id,
     {
@@ -109,7 +109,7 @@ const editar = (req,res)=>{
 
 //Borrar
 const borrar = (req,res)=>{
-  var id = req.params.id
+  let id = req.params.id
   Usuario.findByIdAndRemove(
     id,
       (error, usuario)=>{

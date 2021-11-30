@@ -2,8 +2,8 @@ const Proveedor = require('../models/Proveedor')
 
 //Mostrar
 const mostrar = (req, res)=>{
-  var filterProveedor = req.query.search || null
-  var typeFilter = req.query.type || null
+  let filterProveedor = req.query.search || null
+  let typeFilter = req.query.type || null
   let filter = {}
   if(filterProveedor !== null){
     switch (typeFilter) {
@@ -33,7 +33,7 @@ const mostrar = (req, res)=>{
 
 //Crear
 const crear = (req,res)=>{
-  var proveedor = new Proveedor({
+  let proveedor = new Proveedor({
     _id: req.body.nit,
     nit_proveedor: req.body.nit,
     nombre_proveedor: req.body.nombre,
@@ -54,11 +54,11 @@ const crear = (req,res)=>{
 
 //Editar
 const editar = (req,res)=>{
-  var id = req.body.id_editar
-  var nombre = req.body.nombre_editar
-  var nit = req.body.nit_editar
-  var direccion = req.body.direccion_editar
-  var telefono = req.body.telefono_editar
+  let id = req.body.id_editar
+  let nombre = req.body.nombre_editar
+  let nit = req.body.nit_editar
+  let direccion = req.body.direccion_editar
+  let telefono = req.body.telefono_editar
   Proveedor.findByIdAndUpdate(
     id,
     {
@@ -80,7 +80,7 @@ const editar = (req,res)=>{
 
 //Borrar
 const borrar = (req,res)=>{
-  var id = req.params.id
+  let id = req.params.id
   Proveedor.findByIdAndRemove(
     id,
       (error, proveedor)=>{

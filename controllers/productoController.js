@@ -2,8 +2,8 @@ const Producto = require('../models/Producto')
 const csv = require('csvtojson')
 //Mostrar
 const mostrar = (req, res)=>{
-  var filterProducto = req.query.search || null
-  var typeFilter = req.query.type || null
+  let filterProducto = req.query.search || null
+  let typeFilter = req.query.type || null
   let filter = {}
   if(filterProducto !== null){
     switch (typeFilter) {
@@ -34,7 +34,7 @@ const mostrar = (req, res)=>{
 
 //Crear
 const crear = (req,res)=>{
-  var producto = new Producto({
+  let producto = new Producto({
     codigo_producto: req.body.codigo,
     nombre_producto: req.body.nombre,
     proveedor: req.body.proveedor,
@@ -56,12 +56,12 @@ const crear = (req,res)=>{
 
 //CSV
 const importCSV = (req,res)=>{
-  var temp ;  
+  let temp ;  
   csv()  
   .fromFile(req.file.path)  
   .then((jsonObj)=>{  
       //console.log(jsonObj);  
-      for(var x=0;x<jsonObj;x++){  
+      for(let x=0;x<jsonObj;x++){  
           temp = parseFloat(jsonObj[x].codigo_producto)  
           jsonObj[x].codigo_producto = temp;  
           temp = parseFloat(jsonObj[x].proveedor)  
@@ -79,13 +79,13 @@ const importCSV = (req,res)=>{
 
 //Editar
 const editar = (req,res)=>{
-  var id = req.body.id_editar
-  var codigo = req.body.codigo_editar
-  var nombre = req.body.nombre_editar
-  var proveedor = req.body.proveedor_editar
-  var precio_compra = req.body.precio_compra_editar
-  var iva = req.body.iva_editar
-  var precio_venta = req.body.precio_venta_editar
+  let id = req.body.id_editar
+  let codigo = req.body.codigo_editar
+  let nombre = req.body.nombre_editar
+  let proveedor = req.body.proveedor_editar
+  let precio_compra = req.body.precio_compra_editar
+  let iva = req.body.iva_editar
+  let precio_venta = req.body.precio_venta_editar
   Producto.findByIdAndUpdate(
     id,
     {
@@ -110,7 +110,7 @@ const editar = (req,res)=>{
 
 //Borrar
 const borrar = (req,res)=>{
-  var id = req.params.id
+  let id = req.params.id
   Producto.findByIdAndRemove(
     id,
       (error, producto)=>{
@@ -127,7 +127,7 @@ const borrar = (req,res)=>{
 
 //Return JSON
 const json = (req, res)=>{
-  var filterProdcuto = req.query.search || null
+  let filterProdcuto = req.query.search || null
   let filter = {}
   if(filterProdcuto !== null){
     filter = {codigo_producto: filterProdcuto}
