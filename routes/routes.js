@@ -21,6 +21,7 @@ const usuarioController = require('../controllers/usuarioController')
 const proveedorController = require('../controllers/proveedorController')
 const productoController = require('../controllers/productoController')
 const ventaController = require('../controllers/ventaController')
+const reporteController = require('../controllers/reporteController')
 const indexController = require('../controllers/indexController')
 
 //Ruta inicial - Login
@@ -60,5 +61,8 @@ router.get('/productos/borrar/:id', productoController.borrar)
 //Ruta Ventas
 router.get('/ventas', ventaController.mostrar)
 router.post('/ventas/crear', ventaController.crear)
+
+//Ruta Reportes
+router.get('/reportesTotal', reporteController.mostrarTotal)
 
 module.exports = router

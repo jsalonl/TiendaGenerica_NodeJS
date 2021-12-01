@@ -56,6 +56,7 @@ const json = (req, res)=>{
 //Crear
 const crear = (req,res)=>{
   let cliente = new Cliente({
+    _id: req.body.cedula,
     cedula_cliente: req.body.cedula,
     direccion_cliente: req.body.direccion,
     email_cliente: req.body.email,
@@ -85,6 +86,7 @@ const editar = (req,res)=>{
   Cliente.findByIdAndUpdate(
     id,
     {
+      _id: cedula,
       cedula_cliente: cedula,
       direccion_cliente: direccion,
       email_cliente: email,

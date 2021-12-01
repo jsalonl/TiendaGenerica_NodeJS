@@ -1,3 +1,10 @@
+<%
+let codigo_venta = 1
+if(ventas.length>0){
+  codigo_venta = ventas[0].codigo_venta+1
+}
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +27,12 @@
   <!-- App CSS -->
   <link id="theme-style" rel="stylesheet" href="css/portal.css">
   <link id="theme-style" rel="stylesheet" href="css/style.css">
-
+  <style>
+    .form-control{
+      border: solid 1px #a5a5a5;
+      color: #000
+    }
+  </style>
 </head>
 
 <body class="app">
@@ -62,9 +74,9 @@
 
                 <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
 
-                  <div class="text-grey-m2">
+                  <div class="text-grey-m2 d-none panelVentas">
                     <div class="text-600 text-110 text-blue align-middl">
-                      Codigo Venta : </span>
+                      Codigo Venta : <span><%= codigo_venta %></span>
                     </div>
                   </div>
                 </div>
@@ -73,15 +85,15 @@
 
               <div class="row mt-4 d-none panelVentas">
                 <form id="formularioVenta" action="/ventas/crear" method="post">
-                  <input type="hidden" name="codigoVenta" id="codigoVenta" value="">
+                  <input type="hidden" name="codigoVenta" id="codigoVenta" value="<%= codigo_venta %>">
                   <input type="hidden" name="cedulaCliente" id="cedula">
                   <input type="hidden" name="ivaVenta" id="iva">
                   <input type="hidden" name="totalVenta" id="subtotal">
                   <input type="hidden" name="valorVenta" id="total">
                   <div class="table-responsive">
-                    <table class="table table-borderless border-0 border-b-2 brc-default-l1">
-                      <thead class="bg-none bg-blue">
-                        <tr class="text-white">
+                    <table class="table table-borderless">
+                      <thead class="">
+                        <tr class="">
                           <th>Codigo</th>
                           <th>Nombre</th>
                           <th>Cantidad</th>
@@ -91,7 +103,7 @@
     
                       <tbody class="text-95 text-secondary-d3">
                         <!-- Producto 1 -->
-                        <tr>
+                        <tr class="">
                           <td width="20%">
                             <input type="text" name="codp1" class="form-control codigoProducto">
                             <input type="hidden" name="idp1" class="form-control">

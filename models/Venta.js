@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const ventaSchema = new Schema({
-  cedula_cliente: Number,
+  cedula_cliente: [{
+    type: Number,
+    ref: 'db_clientes'
+  }],
   codigo_venta: Number,
   detalles_venta: [{}],
   total_venta: Number,

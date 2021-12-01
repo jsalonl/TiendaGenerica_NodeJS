@@ -1,23 +1,10 @@
 const Venta = require('../models/Venta')
 
 const mostrar = (req,res)=>{
-  let filterVenta = req.query.search || null
-  let typeFilter = req.query.type || null
-  let filter = {}
-  if(filterVenta !== null){
-    switch (typeFilter) {
-      case 'nombre_producto':
-        filter = {nombre_producto: {'$regex': filterVenta, '$options': 'i'}};
-        break
-      case 'codigo_producto':
-        filter = {codigo_producto: filterVenta}
-        break
-      default:
-        break
-    }
-  }
-  Venta.find(filter)
-    .populate('detalles_venta.producto')
+  let filter = {};
+  Venta.find(filter, {codigo_venta: 1})
+    .sort({codigo_venta: -1})
+    .limit(1)
     .exec(function (error, ventas) {
       if(error){
         console.error(error)
@@ -26,6 +13,7 @@ const mostrar = (req,res)=>{
           detalles_error: error
         })
       }else{
+        console.log(ventas)
         return res.status(200).render('ventas', {ventas: ventas})
       }
     })
