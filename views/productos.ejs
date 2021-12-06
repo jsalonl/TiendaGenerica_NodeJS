@@ -98,8 +98,13 @@
                     <td class="d-none"><%= producto._id %></td>
                     <td><%= producto.codigo_producto %></td>
                     <td><%= producto.nombre_producto %></td>
-                    <td class="d-none"><%= producto.proveedor[0].nit_proveedor %></td>
-                    <td><%= producto.proveedor[0].nombre_proveedor %></td>
+                    <% if(producto.proveedor.length > 0){%>
+                      <td class="d-none"><%= producto.proveedor[0].nit_proveedor %></td>
+                      <td><%= producto.proveedor[0].nombre_proveedor %></td>
+                    <% }else { %>
+                      <td></td> 
+                      <td></td> 
+                    <% } %> 
                     <td><%= producto.precio_compra %></td>
                     <td><%= producto.iva_compra %></td>
                     <td><%= producto.precio_venta %></td>
@@ -137,6 +142,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div class="alert alert-primary" role="alert">
+            Descargue el ejemplo del archivo CSV <a href="/examples/ProductosEjemplo.csv" class="alert-link">Click aqui</a>.
+          </div>
           <form action="/productos/crear" method="post" enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-12">

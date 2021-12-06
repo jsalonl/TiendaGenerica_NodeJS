@@ -12,7 +12,7 @@ const login = (req,res)=>{
 }
 
 //Login Process
-async function loginProcess (req,res,next){
+async function loginProcess (req,res){
   let usuario = req.body.usuario
   let password = req.body.password
   
