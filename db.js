@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const url = "mongodb+srv://rootdbmongo:6dDm9wSloRk5CVsq@cluster0.sqwz4.mongodb.net/tienda_generica?retryWrites=true&w=majority"
+const url = "mongodb://localhost:27017/tienda_generica?retryWrites=true&w=majority"
 
 mongoose.connect(url,{
   useNewUrlParser: true,
